@@ -1,0 +1,33 @@
+<div class="osahan-signup login-page">
+  <video loop autoplay muted id="vid">
+    <source src="../../../../assets/img/bg.mp4" type="video/mp4">
+    <source src="../../../../assets/img/bg.mp4" type="video/ogg">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="d-flex align-items-center justify-content-center flex-column vh-100">
+    <div class="px-5 col-md-6 ms-auto">
+      <div class="px-5 col-10 mx-auto">
+        <h2>Nhập email:</h2>
+        <form [formGroup]="formEmail" (ngSubmit)="checkEmail()" class="mt-5 mb-4">
+
+          <div class="form-group">
+            <label class="text-dark pb-1">Nhập email hiện tại:</label>
+            <input type="text" placeholder="Enter Email" formControlName="email" class="form-control py-1">
+          </div>
+
+          <button class="btn btn-primary btn-lg w-100">Xác nhận</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #falseEmail>
+  <div class="modal-header">
+    <h4 class="modal-title">Email không chính xác!</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="hideSuccessModal()">Đóng</button>
+  </div>
+</ng-template>

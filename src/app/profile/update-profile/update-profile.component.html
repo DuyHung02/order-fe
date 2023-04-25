@@ -1,0 +1,76 @@
+
+<div class="login-page vh-100">
+  <video loop autoplay muted id="vid">
+    <source src="../../../assets/img/bg.mp4" type="video/mp4">
+    <source src="../../../assets/img/bg.mp4" type="video/ogg">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="px-5 col-md-6 ms-auto">
+      <div class="px-5 col-10 mx-auto">
+
+        <div class="px-5 col-10 mx-auto">
+          <img [src]="avatar" class="avt">
+        </div>
+
+        <form [formGroup]="formProfile" (ngSubmit)="createProfile()">
+          <div class="form-group">
+            <label class="text-dark pb-1">Chọn avatar:</label>
+            <input type="file" #upLoadFile (change)="upAvatarUser()" class="form-control py-1">
+          </div>
+
+          <div class="form-group">
+            <label class="text-dark pb-0">Họ:</label>
+            <input type="text" placeholder="VD: Đặng" formControlName="first_name" class="form-control py-1">
+          </div>
+
+          <div class="form-group">
+            <label class="text-dark pb-0">Tên:</label>
+            <input type="text" placeholder="VD: Duy Hùng" formControlName="last_name" class="form-control py-1">
+          </div>
+
+          <div class="form-group">
+            <label class="text-dark pb-0">Tuổi:</label>
+            <input type="number" min="12" max="80" formControlName="age" class="form-control py-1">
+          </div>
+
+          <div class="form-group">
+            <label class="text-dark pb-0">Giới tính:</label>
+            <input type="radio" class="form-switch" name="gender" value="Nam" formControlName="gender">Nam
+            <input type="radio" class="form-switch" name="gender" value="Nữ" formControlName="gender">Nữ
+            <input type="radio" class="form-switch" name="gender" value="Khác" formControlName="gender">Khác
+          </div>
+          <a class="btn btn-secondary btn-lg w-40">Bỏ qua</a>
+          <button style="float: right" class="btn btn-primary btn-lg w-40" type="submit">Xác nhận</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #successModal>
+  <div class="modal-header">
+    <h4 class="modal-title">Đăng ký thành công!</h4>
+  </div>
+  <div class="modal-body">
+    <p>Bạn có muốn xem lại thông tin của mình không?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="nextToHome(); hideSuccessModal()">Đặt đồ ăn luôn!</button>
+    <button type="button" class="btn btn-outline-primary" (click)="nextToProfile(); hideSuccessModal()">OK!</button>
+  </div>
+</ng-template>
+
+<ng-template #falseModal>
+  <div class="modal-header">
+    <h4 class="modal-title">Đăng ký thất bại!</h4>
+  </div>
+  <div class="modal-body">
+    <!--    <p>Bạn có muốn xem lại thông tin của mình không?</p>-->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="hideSuccessModal()">Đóng</button>
+    <!--    <button type="button" class="btn btn-outline-primary" (click)="hideSuccessModal()">OK!</button>-->
+  </div>
+</ng-template>
