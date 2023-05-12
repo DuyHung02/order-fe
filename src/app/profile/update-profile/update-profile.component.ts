@@ -55,7 +55,7 @@ export class UpdateProfileComponent implements OnInit{
 
   createProfile() {
     let profile = this.formProfile.value
-    this.profileService.createProfile(this.userId, profile, this.avatar).subscribe(data => {
+    this.profileService.createProfile(this.userId).subscribe(data => {
       console.log(data)
       localStorage.setItem("userDto", JSON.stringify(data))
       this.modalService.open(this.successModal);

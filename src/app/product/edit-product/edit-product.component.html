@@ -1,0 +1,36 @@
+<div style="text-align: center">
+  <h3>Edit</h3>
+  <form [formGroup]="formProductEdit" (ngSubmit)="updateProduct()">
+    <img [src]="image" class="avt" width="150"><br>
+    <input type="number" hidden formControlName="id">
+    <label>Ảnh món</label><br>
+    <input type="file" #upLoadFile (change)="upAvatarUser()"><br><br>
+
+    <label>Tên món</label><br>
+    <input type="text" formControlName="name"><br><br>
+
+    <label>Giá món</label><br>
+    <input type="number" formControlName="price"><br><br>
+
+    <label>Kiểu món</label><br>
+    <select formControlName="category">
+      <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+    </select>
+
+    <select formControlName="is_active">
+      <option value="true">Còn món</option>
+      <option value="false">Hết món</option>
+    </select>
+    <button type="submit">Xác nhận</button>
+  </form>
+</div>
+
+<ng-template #productModal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="hideSuccessModal()">Đóng</button>
+  </div>
+</ng-template>
+

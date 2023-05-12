@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ProductDto} from "./product/dtos/ProductDto";
+import {ShareDataService} from "./share-data/share-data.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'order-fe';
+
 }

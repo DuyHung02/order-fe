@@ -1,0 +1,53 @@
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th><button class="btn btn-primary" (click)="getNewOrder()" >Đơn mới</button></th>
+      <th><button class="btn btn-warning" (click)="getOrderWaiting()">Đơn đang làm</button></th>
+      <th><button class="btn btn-success" (click)="getOrderDone()">Đơn đã xong</button></th>
+      <th><button class="btn btn-secondary" (click)="getCancelOrder()">Đơn đã hủy</button></th>
+    </tr>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Mã hóa đơn</th>
+      <th scope="col">Số món</th>
+      <th scope="col">Giá đơn</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Chi tiết</th>
+      <th scope="col">Xác nhận</th>
+      <th scope="col">Hủy</th>
+    </tr>
+    </thead>
+  <tbody>
+  <tr *ngFor="let o of orders; let i = index">
+    <th scope="row">{{i}}</th>
+    <td>MHD{{o.id}}</td>
+    <td>{{o.total_product}} món</td>
+    <td>{{o.total_price}}đ</td>
+    <td *ngIf="o.status == 'new'">Chưa xác nhận</td>
+    <td *ngIf="o.status == 'waiting'">Đang chờ</td>
+    <td *ngIf="o.status == 'done'">Đã xong</td>
+    <td><a (click)="getUserOrderDetail(o?.id)">chi tiết</a></td>
+
+    <td *ngIf="o.status == 'new'">
+      <button class="btn btn-outline-success" (click)="confirmOrder(o.id)">Xác nhận</button>
+    </td>
+
+    <td *ngIf="o.status == 'waiting'">
+      <button class="btn btn-outline-warning" (click)="confirmOrder(o.id)">Hoàn thành</button>
+    </td>
+
+    <td *ngIf="o.status == 'done'">
+      <button class="btn btn-success">Đã xong</button>
+    </td>
+
+    <td *ngIf="o.status == 'new'">
+      <button class="btn btn-outline-danger" (click)="cancelOrder(o.id)">Hủy</button>
+    </td>
+
+    <td *ngIf="o.status != 'new'">
+      <button class="btn btn-outline-danger" disabled (click)="cancelOrder(o.id)">Hủy</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

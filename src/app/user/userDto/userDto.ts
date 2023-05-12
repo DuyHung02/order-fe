@@ -1,4 +1,5 @@
 import {ProfileDto} from "../../profile/profileDto/profileDto";
+import {CartProductsDto} from "../../cart/dtos/CartProductsDto";
 
 export class UserDto {
   id?: number;
@@ -6,12 +7,6 @@ export class UserDto {
   role?: string
   profile?: ProfileDto
   token?: string
+  cart?: CartProductsDto
 
-  constructor(id: number, email: string, role: string, profile: ProfileDto, token: string) {
-    this.id = id;
-    this.email = email;
-    this.role = role;
-    this.profile = profile;
-    this.token = token;
-  }
 }

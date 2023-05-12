@@ -1,0 +1,60 @@
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Mã hóa đơn</th>
+    <th scope="col">Người đặt</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td scope="row">MHD{{orderDto?.id}}</td>
+    <td>{{orderDto?.user?.email}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th scope="col">STT</th>
+    <th scope="col">Sản phẩm</th>
+    <th scope="col">Số lượng</th>
+    <th scope="col">Đơn giá</th>
+    <th scope="col">Giá món</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let od of orderDto?.order_details; let i = index">
+    <td scope="row">{{i}}</td>
+    <td>{{od.product?.name}}</td>
+    <td>x{{od.quantity}}</td>
+    <td>{{od.product?.price}}đ</td>
+    <td>{{od.total_price_Product}}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Tổng giá: {{orderDto?.total_price}}đ</td>
+    <td *ngIf="orderDto?.status == 'new'">Trạng thái: Chưa xác nhận</td>
+    <td *ngIf="orderDto?.status == 'waiting'">Trạng thái: Đang chờ</td>
+    <td *ngIf="orderDto?.status == 'done'">Trạng thái: Đã xong</td>
+
+    <td *ngIf="orderDto?.status == 'new'">
+      <button class="btn btn-outline-success" (click)="confirmOrder(orderDto?.id)">Xác nhận</button>
+    </td>
+
+    <td *ngIf="orderDto?.status == 'waiting'">
+      <button class="btn btn-outline-warning" (click)="confirmOrder(orderDto?.id)">Hoàn thành</button>
+    </td>
+
+    <td *ngIf="orderDto?.status == 'done'">
+      <button class="btn btn-success">Đã xong</button>
+    </td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #falseModal>
+  <div class="modal-header false-modal">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+</ng-template>

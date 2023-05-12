@@ -1,0 +1,55 @@
+<div style="text-align: center">
+  <h3>Create</h3>
+  <form [formGroup]="formProduct" (ngSubmit)="createProduct()">
+    <img [src]="avatar" class="avt"><br>
+    <label>Ảnh món</label><br>
+    <input type="file" #upLoadFile (change)="upAvatarUser()"><br><br>
+    <label>Tên món</label><br>
+    <input type="text" formControlName="name"><br><br>
+    <label>Giá món</label><br>
+    <input type="number" formControlName="price"><br><br>
+    <label>Kiểu món</label><br>
+    <select formControlName="category">
+      <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+    </select>
+    <button type="button" (click)="openCreateCategoryModal()">Thêm danh mục</button>
+    <br><br>
+    <button type="submit">Xác nhận</button>
+  </form>
+</div>
+
+<ng-template #categoryModal>
+  <div class="modal-header">
+<!--    <div style="text-align: center">-->
+      <h3>Thêm danh mục</h3>
+      <form [formGroup]="formCategory" (ngSubmit)="createCategory()">
+        <img [src]="imageCategory" class="img-cate"><br>
+        <label>Ảnh mục</label><br>
+        <input type="file" #upLoadCategory (change)="upLoadImageCategory()"><br><br>
+        <label>Tên danh mục</label><br>
+        <input type="text" formControlName="name"><br><br>
+        <button type="submit">Xác nhận</button>
+      </form>
+    </div>
+<!--  </div>-->
+</ng-template>
+
+<ng-template #productModal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="hideSuccessModal()">Đóng</button>
+  </div>
+</ng-template>
+
+<ng-template #successModal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="createContinue(); hideSuccessModal()">Thêm tiếp
+    </button>
+    <button type="button" class="btn btn-primary" (click)="back(); hideSuccessModal()">Xong</button>
+  </div>
+</ng-template>

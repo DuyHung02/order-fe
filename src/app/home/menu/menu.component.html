@@ -1,0 +1,57 @@
+<div>
+  <hr>
+  <div class="pt-4 pb-2 title d-flex align-items-center">
+    <h3 class="m-0">Combo cơm</h3>
+    <a class="fw-bold ms-auto" href="#">View all <i class="feather-chevrons-right"></i></a>
+  </div>
+
+  <div class="trending-slider">
+    <div class="osahan-slider-item" *ngFor="let p of products">
+      <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+        <div class="list-card-image">
+          <div class="star position-absolute"><span class="badge text-bg-success"><i
+            class="feather-star"></i>{{p.price}}</span></div>
+          <div class="favourite-heart text-danger position-absolute rounded-circle"><a><i
+            class="feather-heart"></i></a></div>
+          <div class="member-plan position-absolute"><span class="badge text-bg-dark">{{p.category?.name}}</span>
+          </div>
+          <a>
+            <img src="{{p.image}}" class="img-fluid item-img w-100 image">
+          </a>
+        </div>
+        <div class="p-3 position-relative">
+          <div class="list-card-body">
+            <h6 class="mb-1"><a class="text-black">{{p.name}}
+            </a>
+            </h6>
+            <p class="text-gray mb-3">{{p.price}}</p>
+            <div *ngIf="p.is_active == 1" class="list-card-badge">
+              <span class="badge text-bg-success">Còn món</span>
+              <button style="float: right" class="btn btn-primary" (click)="addToCart(p.id)">Chọn</button>
+            </div>
+
+            <div *ngIf="p.is_active == 0" class="list-card-badge">
+              <span class="badge text-bg-secondary">Hết hàng</span>
+              <button style="float: right" class="btn btn-primary" disabled >Chọn</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #messModal>
+  <div class="modal-header">
+    <div class="px-5 col-10 mx-auto">
+      <h2 class="text-dark my-0">Chưa đăng nhập</h2>
+      <p class="text-50">Đăng nhập ngay?</p>
+      <br>
+      <button class="btn btn-secondary btn-lg w-100" (click)="hideModal()">Đóng</button>
+      <br>
+      <br>
+      <button class="btn btn-primary btn-lg w-100" (click)="hideModal()">Đăng nhập</button>
+    </div>
+  </div>
+</ng-template>
+

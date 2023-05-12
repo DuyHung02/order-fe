@@ -1,0 +1,16 @@
+<div class="bg-success">
+  <div class="container">
+    <div class="cat-slider">
+      <div class="cat-item px-1 py-3" *ngFor="let c of categories">
+        <div class="bg-white rounded position-relative p-2 text-center shadow-sm">
+          <img src="../../../assets/img/1.png" class="img-fluid rounded-3 p-3" alt="...">
+          <div class="listing-card-body pt-0">
+            <h6 class="card-title mb-1 fs-14">{{c.name}}</h6>
+            <p class="card-text small text-success"></p>
+          </div>
+          <a href="/product/filter/{{c.id}}" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
