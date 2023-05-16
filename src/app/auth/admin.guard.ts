@@ -11,7 +11,7 @@ export class AdminGuard implements CanActivate {
     if (isAdmin) {
       return true
     } else {
-      await this.router.navigate(['/profile'])
+      await this.router.navigate(['/'])
       return false
     }
   }

@@ -8,6 +8,7 @@ import {ProfileService} from "../../profile/profile-service/profile.service";
 import {ShareDataService} from "../../share-data/share-data.service";
 import {CartService} from "../../cart/cart-service/cart.service";
 import {UserService} from "../../user/user.service";
+import {RoleDto} from "../../user/userDto/RoleDto";
 
 @Component({
   selector: 'app-nav',
@@ -114,9 +115,12 @@ export class NavComponent implements OnInit {
 
   async createUser(password: string) {
     await this.authService.createUser(this.email, password).subscribe(token => {
-      localStorage.setItem("token", token.access_token + "")})
-    await this.profileService.createProfile().subscribe(profile => {})
-    await this.cartService.createCart().subscribe(cart => {})
+      localStorage.setItem("token", token.access_token + "")
+    })
+    await this.profileService.createProfile().subscribe(profile => {
+    })
+    await this.cartService.createCart().subscribe(cart => {
+    })
     await this.userService.findUserById().subscribe(user => {
       localStorage.setItem('userDto', JSON.stringify(user))
       this.userDto = user
@@ -124,19 +128,30 @@ export class NavComponent implements OnInit {
     })
   }
 
+  roles: RoleDto[] | undefined = []
+
   async login() {
-    const user = this.formLogin.value
-    await this.authService.login(user).subscribe(data => {
-      localStorage.setItem('token', data.access_token + '')
-    }, error => {
-      this.messageModal = error.error.message
-      this.modalService.open(this.falseModal)
-    })
-    await this.userService.findUserById().subscribe(user => {
-      localStorage.setItem('userDto', JSON.stringify(user))
-      this.userDto = user
-      this.hideModal()
-    })
+    const loginValue = this.formLogin.value
+      await this.authService.login(loginValue).subscribe(token => {
+        localStorage.setItem('token', token?.access_token + '')
+        this.userService.findUserRole().subscribe(user => {
+          this.userDto = user
+          localStorage.setItem('userDto', JSON.stringify(user))
+          this.roles = user?.roles
+          if (this.roles) {
+            for (let i = 0; i < this.roles?.length; i++) {
+              if (this.roles[i].name === 'admin') {
+                location.replace('home/admin')
+                break;
+              }
+            }
+          }
+          this.hideModal()
+        })
+      }, error => {
+        this.messageModal = error.error.message
+        this.modalService.open(this.falseModal)
+      })
   }
 
   logout() {

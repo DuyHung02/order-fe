@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {lastValueFrom, Observable} from "rxjs";
 import {UserDto} from "../user/userDto/userDto";
 import {TokenDto} from "./dtos/TokenDto";
 import {UserService} from "../user/user.service";
@@ -65,9 +65,8 @@ export class AuthService {
 
   async isAdmin(): Promise<boolean> {
     try {
-      const user = await this.userService.findUserRole().toPromise();
+      const user = await lastValueFrom(this.userService.findUserRole());
       const roles = user?.roles
-      console.log(roles)
       if (roles) {
         for (let i = 0; i < roles?.length; i++) {
           if (roles[i].name === 'admin')
