@@ -4,10 +4,10 @@ import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup} from "@angular/forms";
-import {BsModalRef} from "ngx-bootstrap/modal";
 import {ProfileService} from "../../profile/profile-service/profile.service";
 import {ShareDataService} from "../../share-data/share-data.service";
 import {CartService} from "../../cart/cart-service/cart.service";
+import {UserService} from "../../user/user.service";
 
 @Component({
   selector: 'app-nav',
@@ -23,17 +23,16 @@ export class NavComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,
               private modalService: NgbModal, private profileService: ProfileService,
-              private shareDataService: ShareDataService, private cartService: CartService) {
+              private shareDataService: ShareDataService, private cartService: CartService,
+              private userService: UserService) {
   }
 
   statusModal: boolean = true
   userDto: UserDto | undefined
-  checkUser: UserDto | undefined
-  userId: any
   messageModal!: string
   email: any
   public buttonText = 'Gửi mã xác nhận';
-  public counter = 59;
+  public counter = 60;
   public disabled = false;
   formLogin: FormGroup = new FormGroup({
     email: new FormControl(),
@@ -55,8 +54,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     // @ts-ignore
-    this.checkUser = JSON.parse(localStorage.getItem("userDto"))
-    // this.checkUser = this.shareDataService.getUserData()
+    this.userDto = JSON.parse(localStorage.getItem('userDto'))
   }
 
   openLoginModal() {
@@ -114,51 +112,30 @@ export class NavComponent implements OnInit {
     }
   }
 
-  createUser(password: string) {
-    this.authService.createUser(this.email, password).subscribe(data => {
-      localStorage.setItem("token", data.token + "")
-      this.userDto = data
-      this.userId = this.userDto.id
-      this.profileService.createProfile(this.userId).subscribe(profile => {
-        this.cartService.createCart(this.userId).subscribe(userDto => {
-          localStorage.setItem('userDto', JSON.stringify(userDto))
-          location.reload()
-        }, error => {
-          this.messageModal = error.error.message
-          this.modalService.open(this.falseModal);
-        })
-      }, error => {
-        this.messageModal = 'false'
-        this.modalService.open(this.falseModal);
-      })
-    }, error => {
-      this.messageModal = error.error.message
-      this.modalService.open(this.falseModal);
+  async createUser(password: string) {
+    await this.authService.createUser(this.email, password).subscribe(token => {
+      localStorage.setItem("token", token.access_token + "")})
+    await this.profileService.createProfile().subscribe(profile => {})
+    await this.cartService.createCart().subscribe(cart => {})
+    await this.userService.findUserById().subscribe(user => {
+      localStorage.setItem('userDto', JSON.stringify(user))
+      this.userDto = user
+      this.hideModal()
     })
   }
 
-  login() {
+  async login() {
     const user = this.formLogin.value
-    this.authService.login(user).subscribe(data => {
-      if (data) {
-        localStorage.setItem("userDto", JSON.stringify(data))
-        this.checkUser = data
-        localStorage.setItem("token", data.token + "")
-        this.hideModal()
-        if (this.checkUser.role == 'admin') {
-          location.replace('/home/admin')
-        } else {
-          location.reload()
-        }
-      }
+    await this.authService.login(user).subscribe(data => {
+      localStorage.setItem('token', data.access_token + '')
     }, error => {
-      if (error.status == 404) {
-        this.messageModal = error.error.message
-        this.modalService.open(this.falseModal);
-      } else if (error.status == 400) {
-        this.messageModal = error.error.message
-        this.modalService.open(this.falseModal);
-      }
+      this.messageModal = error.error.message
+      this.modalService.open(this.falseModal)
+    })
+    await this.userService.findUserById().subscribe(user => {
+      localStorage.setItem('userDto', JSON.stringify(user))
+      this.userDto = user
+      this.hideModal()
     })
   }
 

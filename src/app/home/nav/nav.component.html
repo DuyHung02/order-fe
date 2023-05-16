@@ -36,38 +36,38 @@
               </div>
             </a>
 
-            <a *ngIf="checkUser?.role == 'user'" routerLink="user/order" class="widget-header me-4 text-white btn bg-primary m-none">
-              <div class="icon d-flex align-items-center">
-                <i class="feather-disc h6 me-2 mb-0"></i> <span>Order</span>
-              </div>
-            </a>
+<!--            <a *ngIf="userDto?.roles == 'user'" routerLink="user/order" class="widget-header me-4 text-white btn bg-primary m-none">-->
+<!--              <div class="icon d-flex align-items-center">-->
+<!--                <i class="feather-disc h6 me-2 mb-0"></i> <span>Order</span>-->
+<!--              </div>-->
+<!--            </a>-->
 
-            <a *ngIf="checkUser?.role == 'admin'" routerLink="home/admin" class="widget-header me-4 text-white btn bg-primary m-none">
-              <div class="icon d-flex align-items-center">
-                <i class="feather-disc h6 me-2 mb-0"></i> <span>Sản phẩm</span>
-              </div>
-            </a>
+<!--            <a *ngIf="checkUser?.role == 'admin'" routerLink="home/admin" class="widget-header me-4 text-white btn bg-primary m-none">-->
+<!--              <div class="icon d-flex align-items-center">-->
+<!--                <i class="feather-disc h6 me-2 mb-0"></i> <span>Sản phẩm</span>-->
+<!--              </div>-->
+<!--            </a>-->
 
-            <a *ngIf="checkUser == null" href="#" (click)="openCheckMailModal()"
+            <a *ngIf="userDto == null" href="#" (click)="openCheckMailModal()"
                class="widget-header me-4 text-dark m-none">
               <div class="icon d-flex align-items-center">
                 <i class="feather-user-plus h6 me-2 mb-0"></i> <span>Đăng ký</span>
               </div>
             </a>
 
-            <a *ngIf="checkUser == null" href="#" (click)="openLoginModal()"
+            <a *ngIf="userDto == null" href="#" (click)="openLoginModal()"
                class="widget-header me-4 text-dark m-none">
               <div class="icon d-flex align-items-center">
                 <i class="feather-user h6 me-2 mb-0"></i> <span>Đăng nhập</span>
               </div>
             </a>
 
-            <div class="dropdown me-4 m-none" *ngIf="checkUser != null">
+            <div class="dropdown me-4 m-none" *ngIf="userDto != null">
               <a href="#" class="dropdown-toggle text-dark py-3 d-block" id="dropdownMenuButton"
                  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="#" src="{{checkUser.profile?.avatar}}"
+                <img alt="#" src="{{userDto.profile?.avatar}}"
                      class="img-fluid rounded-circle header-user me-2 header-user avt">
-                Hi {{checkUser.profile?.last_name}}
+                Hi {{userDto.profile?.last_name}}
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" routerLink="/profile">Cá nhân</a>

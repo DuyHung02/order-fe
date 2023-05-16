@@ -21,6 +21,7 @@ import {OrderComponent} from "./order/order-admin/show-order/order.component";
 import {DetailOrderComponent} from "./order/order-admin/detail-order/detail-order.component";
 import {OrderUserComponent} from "./order/order-user/order-user.component";
 import {DetailOrderUserComponent} from "./order/order-user/detail-order-user/detail-order-user.component";
+import {AdminGuard} from "./auth/admin.guard";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
@@ -32,7 +33,7 @@ const routes: Routes = [
   {path: 'change/password', component: ChangePasswordComponent},
   {path: 'check/otp/forgot/password', component: CheckOtpForgotPassComponent},
   {path: 'forgot/password', component: ForgotPasswordComponent},
-  {path: 'home/admin', component: HomeAdminComponent},
+  {path: 'home/admin', component: HomeAdminComponent, canActivate: [AdminGuard]},
   {path: 'create/product', component: CreateProductComponent},
   {path: 'edit/product/:id', component: EditProductComponent},
   {path: 'cart', component: CartComponent},

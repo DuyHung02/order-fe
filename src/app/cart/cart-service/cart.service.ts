@@ -12,9 +12,9 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  createCart(id: number): Observable<UserDto> {
-    const userId = {id: id}
-    return this.http.post<UserDto>('http://localhost:3000/carts/create', userId)
+  createCart() {
+    const cart = {}
+    return this.http.post('http://localhost:3000/carts/create', cart)
   }
 
   addToCart(cartId: number | null | undefined, productId: number | null | undefined): Observable<CartDto> {

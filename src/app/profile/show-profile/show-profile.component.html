@@ -33,10 +33,7 @@
             <div>
 
               <form [formGroup]="formProfile" (ngSubmit)="saveProfile()">
-<!--                <div class="form-group mb-3">-->
-<!--                  <label class="pb-1">ID: </label>-->
-<!--                  <input type="text" readonly class="form-control" formControlName="id">-->
-<!--                </div>-->
+                  <input type="text" hidden class="form-control" formControlName="id">
                 <div class="form-group mb-3">
                   <label class="pb-1">Số dư: </label>
                   <input type="text" readonly class="form-control" formControlName="balance">
@@ -141,7 +138,7 @@
     <h4 class="modal-title">{{messageModal}}</h4>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="reload()">Đóng!</button>
+    <button type="button" class="btn btn-primary" (click)="hiddenModal()" >Đóng!</button>
   </div>
 </ng-template>
 

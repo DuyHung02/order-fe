@@ -8,6 +8,7 @@ import {ProfileService} from "../profile-service/profile.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ShareDataService} from "../../share-data/share-data.service";
 import {AuthService} from "../../auth/auth.service";
+import {UserService} from "../../user/user.service";
 
 @Component({
   selector: 'app-show-profile',
@@ -24,7 +25,7 @@ export class ShowProfileComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage, private profileService: ProfileService,
               private modalService: NgbModal, private shareDataService: ShareDataService,
-              private authService: AuthService) {
+              private authService: AuthService, private userService: UserService) {
   }
 
   selectImage: any = null
@@ -40,6 +41,7 @@ export class ShowProfileComponent implements OnInit {
   deposit!: number
 
   formProfile: FormGroup = new FormGroup({
+    id: new FormControl(),
     first_name: new FormControl(),
     last_name: new FormControl(),
     age: new FormControl(),
@@ -59,16 +61,13 @@ export class ShowProfileComponent implements OnInit {
   })
   avatar: any
 
-  async ngOnInit() {
-    // @ts-ignore
-    this.user = JSON.parse(localStorage.getItem("userDto"))
-    this.userId = this.user?.id
-    this.email = this.user?.email
-    await this.profileService.findUserById(this.userId).subscribe(data => {
-      this.user = data
+  ngOnInit() {
+    this.profileService.findUserProfile().subscribe(user => {
+      this.user = user
       this.profile = this.user.profile
       this.profileId = this.profile?.id
       this.formProfile = new FormGroup({
+        id: new FormControl(this.profile?.id),
         first_name: new FormControl(this.profile?.first_name),
         last_name: new FormControl(this.profile?.last_name),
         age: new FormControl(this.profile?.age),
@@ -85,15 +84,10 @@ export class ShowProfileComponent implements OnInit {
 
   saveProfile() {
     const profile = this.formProfile.value
-    this.profileService.saveProfile(this.userId, profile, this.avatar).subscribe(data => {
-      if (data) {
-        localStorage.setItem('userDto', JSON.stringify(data))
-        this.messageModal = 'Cập nhật thành công'
-        this.modalService.open(this.successModal);
-      } else {
-        this.messageModal = 'Cập nhật thất bại'
-        this.modalService.open(this.successModal);
-      }
+    this.profileService.updateProfile(profile, this.avatar).subscribe(data => {
+      this.profile = data
+      this.messageModal = 'Cập nhật thành công'
+      this.modalService.open(this.successModal)
     })
   }
 
@@ -112,10 +106,6 @@ export class ShowProfileComponent implements OnInit {
         })))
       ).subscribe();
     }
-  }
-
-  hideSuccessModal() {
-    this.modalService.dismissAll();
   }
 
   sendOtp() {
@@ -177,8 +167,8 @@ export class ShowProfileComponent implements OnInit {
     }, 1000);
   }
 
-  reload() {
-    location.reload()
+  hiddenModal() {
+    this.modalService.dismissAll()
   }
 
 }

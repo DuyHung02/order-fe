@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserDto} from "../user/userDto/userDto";
+import {TokenDto} from "./dtos/TokenDto";
+import {UserService} from "../user/user.service";
+import {RoleDto} from "../user/userDto/RoleDto";
 
 
 @Injectable({
@@ -9,7 +12,7 @@ import {UserDto} from "../user/userDto/userDto";
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   checkEmail(email: string): Observable<boolean> {
     return this.http.get<boolean>(`http://localhost:3000/auth/check/${email}`)
@@ -42,14 +45,13 @@ export class AuthService {
     return this.http.get<number>(`http://localhost:3000/users/send/otp/${email}`)
   }
 
-  createUser(email: string, password: string): Observable<UserDto> {
+  createUser(email: string, password: string): Observable<TokenDto> {
     const user = {email, password}
-    console.log(user)
-    return this.http.post<UserDto>('http://localhost:3000/auth/register', user)
+    return this.http.post<TokenDto>('http://localhost:3000/auth/register', user)
   }
 
-  login(user: UserDto): Observable<UserDto> {
-    return this.http.post<UserDto>('http://localhost:3000/auth/login', user)
+  login(user: UserDto): Observable<TokenDto> {
+    return this.http.post<TokenDto>('http://localhost:3000/auth/login', user)
   }
 
   changePassword(id: number, email: string, password: string, code: string): Observable<boolean> {
@@ -59,5 +61,23 @@ export class AuthService {
 
   test(): Observable<any> {
     return this.http.get<any>('http://localhost:3000/auth/user')
+  }
+
+  async isAdmin(): Promise<boolean> {
+    try {
+      const user = await this.userService.findUserRole().toPromise();
+      const roles = user?.roles
+      console.log(roles)
+      if (roles) {
+        for (let i = 0; i < roles?.length; i++) {
+          if (roles[i].name === 'admin')
+            return true
+        }
+      }
+      return false
+    } catch (error) {
+      console.log(error)
+      return false
+    }
   }
 }
