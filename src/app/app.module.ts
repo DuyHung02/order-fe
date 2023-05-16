@@ -30,6 +30,7 @@ import { DetailOrderComponent } from './order/order-admin/detail-order/detail-or
 import { OrderUserComponent } from './order/order-user/order-user.component';
 import {CategoryComponent} from "./categories/category/category.component";
 import { DetailOrderUserComponent } from './order/order-user/detail-order-user/detail-order-user.component';
+import { UpdateCategoryComponent } from './categories/category/update-category/update-category.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DetailOrderUserComponent } from './order/order-user/detail-order-user/d
     OrderComponent,
     DetailOrderComponent,
     OrderUserComponent,
-    DetailOrderUserComponent],
+    DetailOrderUserComponent,
+    UpdateCategoryComponent],
   imports: [
     FormsModule,
     HttpClientModule,

@@ -62,9 +62,10 @@ export class CreateProductComponent implements OnInit{
   }
 
   createCategory() {
-    const nameCategory = this.formCategory.value.name
-    this.categoryService.createCategory(nameCategory, this.imageCategory).subscribe(data => {
+    const category = this.formCategory.value
+    this.categoryService.createCategory(category, this.imageCategory).subscribe(data => {
       this.categories = data
+      this.hideModal()
     })
   }
 
@@ -110,7 +111,13 @@ export class CreateProductComponent implements OnInit{
     }
   }
 
-  hideSuccessModal() {
+  clearValueFormCategory() {
+    this.formCategory = new FormGroup({
+      name: new FormControl('')
+    })
+  }
+
+  hideModal() {
     this.modalService.dismissAll();
   }
 }

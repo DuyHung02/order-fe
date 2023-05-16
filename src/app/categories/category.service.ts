@@ -14,8 +14,17 @@ export class CategoryService {
     return this.http.get<CategoryDto[]>('http://localhost:3000/categories/find/all')
   }
 
-  createCategory(name: string, image: string): Observable<CategoryDto[]> {
-    const createCategory = {name: name, image: image}
-    return this.http.post<CategoryDto[]>('http://localhost:3000/categories/create', createCategory)
+  createCategory(category: CategoryDto, image: string): Observable<CategoryDto[]> {
+    category.image = image
+    return this.http.post<CategoryDto[]>('http://localhost:3000/categories/create', category)
+  }
+
+  updateCategory(category: CategoryDto, image: string | undefined): Observable<CategoryDto[]> {
+    category.image = image
+    return this.http.post<CategoryDto[]>('http://localhost:3000/categories/update', category)
+  }
+
+  findCategoryById(id: number | undefined): Observable<CategoryDto> {
+    return this.http.get<CategoryDto>(`http://localhost:3000/categories/find/${id}`)
   }
 }

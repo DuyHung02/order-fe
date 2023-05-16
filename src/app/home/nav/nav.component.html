@@ -71,11 +71,11 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" routerLink="/profile">Cá nhân</a>
+                <a *ngIf="isAdmin == true" class="dropdown-item" routerLink="/update/category">Danh mục</a>
                 <a class="dropdown-item" routerLink="/check/mail/password">Đổi mật khẩu</a>
                 <a class="dropdown-item" href="" (click)="logout()">Logout</a>
               </div>
             </div>
-
           </div>
         </div>
       </div>

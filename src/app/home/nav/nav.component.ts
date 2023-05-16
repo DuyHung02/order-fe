@@ -56,6 +56,15 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     // @ts-ignore
     this.userDto = JSON.parse(localStorage.getItem('userDto'))
+    this.roles = this.userDto?.roles
+    if (this.roles) {
+      for (let i = 0; i < this.roles?.length; i++) {
+        if (this.roles[i].name == 'admin') {
+          this.isAdmin = true
+          break
+        }
+      }
+    }
   }
 
   openLoginModal() {
@@ -129,6 +138,7 @@ export class NavComponent implements OnInit {
   }
 
   roles: RoleDto[] | undefined = []
+  isAdmin: boolean = false
 
   async login() {
     const loginValue = this.formLogin.value

@@ -22,6 +22,7 @@ import {DetailOrderComponent} from "./order/order-admin/detail-order/detail-orde
 import {OrderUserComponent} from "./order/order-user/order-user.component";
 import {DetailOrderUserComponent} from "./order/order-user/detail-order-user/detail-order-user.component";
 import {AdminGuard} from "./auth/admin.guard";
+import {UpdateCategoryComponent} from "./categories/category/update-category/update-category.component";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
   {path: 'admin/order', component: OrderComponent},
   {path: 'admin/order/detail', component: DetailOrderComponent},
   {path: 'user/order/detail', component: DetailOrderUserComponent},
-  {path: 'user/order', component: OrderUserComponent}
+  {path: 'user/order', component: OrderUserComponent},
+  {path: 'update/category', component: UpdateCategoryComponent}
 ];
 
 @NgModule({

@@ -12,7 +12,7 @@
     <select formControlName="category">
       <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
     </select>
-    <button type="button" (click)="openCreateCategoryModal()">Thêm danh mục</button>
+    <button type="button" (click)="openCreateCategoryModal(); clearValueFormCategory()">Thêm danh mục</button>
     <br><br>
     <button type="submit">Xác nhận</button>
   </form>
@@ -39,7 +39,7 @@
     <h4 class="modal-title">{{messageModal}}</h4>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="hideSuccessModal()">Đóng</button>
+    <button type="button" class="btn btn-secondary" (click)="hideModal()">Đóng</button>
   </div>
 </ng-template>
 
@@ -48,8 +48,8 @@
     <h4 class="modal-title">{{messageModal}}</h4>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-primary" (click)="createContinue(); hideSuccessModal()">Thêm tiếp
+    <button type="button" class="btn btn-outline-primary" (click)="createContinue(); hideModal()">Thêm tiếp
     </button>
-    <button type="button" class="btn btn-primary" (click)="back(); hideSuccessModal()">Xong</button>
+    <button type="button" class="btn btn-primary" (click)="back(); hideModal()">Xong</button>
   </div>
 </ng-template>
