@@ -1,0 +1,7 @@
+.img-cate {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  text-align: center;
+}

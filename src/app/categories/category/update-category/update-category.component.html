@@ -1,0 +1,33 @@
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Update</th>
+    </tr>
+    </thead>
+  <tbody>
+  <tr *ngFor="let c of categories">
+    <th scope="row"><img src="{{c.image}}" width="150"></th>
+    <td>{{c.name}}</td>
+    <td><button (click)="updateCategory(c?.id)">Edit</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #categoryModal>
+  <div class="modal-header">
+    <!--    <div style="text-align: center">-->
+    <h3>Thêm danh mục</h3>
+    <form [formGroup]="formCategory" (ngSubmit)="saveCategory()">
+      <img [src]="imageCategory" class="img-cate"><br>
+      <label>Ảnh mục</label><br>
+      <input type="file" #upLoadCategory (change)="upLoadImageCategory()"><br><br>
+      <input type="text" hidden formGroupName="id">
+      <label>Tên danh mục</label><br>
+      <input type="text" formControlName="name"><br><br>
+      <button type="submit">Xác nhận</button>
+    </form>
+  </div>
+  <!--  </div>-->
+</ng-template>
