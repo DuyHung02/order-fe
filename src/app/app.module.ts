@@ -31,6 +31,12 @@ import { OrderUserComponent } from './order/order-user/order-user.component';
 import {CategoryComponent} from "./categories/category/category.component";
 import { DetailOrderUserComponent } from './order/order-user/detail-order-user/detail-order-user.component';
 import { UpdateCategoryComponent } from './categories/category/update-category/update-category.component';
+import { SignUpComponent } from './auth/sign-up/sign-up/sign-up.component';
+import { NavBarComponent } from './home/nav-bar/nav-bar.component';
+import { BodyComponent } from './home/body/body.component';
+import { SwiperDirectiveDirective } from './home/swiper-directive.directive';
+import {CommonModule} from "@angular/common";
+import { ContentComponent } from './home/content/content.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,12 @@ import { UpdateCategoryComponent } from './categories/category/update-category/u
     DetailOrderComponent,
     OrderUserComponent,
     DetailOrderUserComponent,
-    UpdateCategoryComponent],
+    UpdateCategoryComponent,
+    SignUpComponent,
+    NavBarComponent,
+    BodyComponent,
+    SwiperDirectiveDirective,
+    ContentComponent],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -66,12 +77,16 @@ import { UpdateCategoryComponent } from './categories/category/update-category/u
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    CommonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AddTokenInterceptor,
     multi: true
   }],
+  exports: [
+    SwiperDirectiveDirective
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,13 +23,16 @@ import {OrderUserComponent} from "./order/order-user/order-user.component";
 import {DetailOrderUserComponent} from "./order/order-user/detail-order-user/detail-order-user.component";
 import {AdminGuard} from "./auth/admin.guard";
 import {UpdateCategoryComponent} from "./categories/category/update-category/update-category.component";
+import {SignUpComponent} from "./auth/sign-up/sign-up/sign-up.component";
+import {BodyComponent} from "./home/body/body.component";
+import {ContentComponent} from "./home/content/content.component";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
   {path: 'check/mail/forgot/password', component: CheckMailForgotPassComponent},
   {path: 'check/otp/password', component: CheckOtpChangePasswordComponent},
   {path: 'update/profile', component: UpdateProfileComponent},
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'profile', component: ShowProfileComponent},
   {path: 'change/password', component: ChangePasswordComponent},
   {path: 'check/otp/forgot/password', component: CheckOtpForgotPassComponent},
@@ -42,7 +45,11 @@ const routes: Routes = [
   {path: 'admin/order/detail', component: DetailOrderComponent},
   {path: 'user/order/detail', component: DetailOrderUserComponent},
   {path: 'user/order', component: OrderUserComponent},
-  {path: 'update/category', component: UpdateCategoryComponent}
+  {path: 'update/category', component: UpdateCategoryComponent},
+
+  {path: 'register', component: SignUpComponent},
+  {path: '', component: BodyComponent},
+  {path: 'content', component: ContentComponent}
 ];
 
 @NgModule({

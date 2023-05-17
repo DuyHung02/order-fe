@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  checkEmail(email: string): Observable<boolean> {
+  checkEmail(email: string | undefined): Observable<boolean> {
     return this.http.get<boolean>(`http://localhost:3000/auth/check/${email}`)
   }
 

@@ -1,0 +1,92 @@
+<body class="vh-100">
+<div class="authincation ">
+  <div class="container">
+    <div class="row justify-content-center h-100 align-items-center">
+      <div class="col-md-6">
+        <div class="authincation-content">
+          <div class="row no-gutters">
+            <div class="col-xl-12">
+
+
+              <div class="auth-form" *ngIf="formEmail == true">
+                <div class="text-center mb-3">
+                  <a href="index.html"><img src="assets/images/logo-full.png" alt=""></a>
+                </div>
+                <h4 class="text-center mb-4">Đăng ký tài khoản</h4>
+                <form [formGroup]="formCheckEmail" (ngSubmit)="checkEmail()">
+                  <div class="mb-3">
+                    <label class="mb-1"><strong>Email</strong></label>
+                    <input type="email" class="form-control" placeholder="hello@email.com"
+                           formControlName="email">
+                    <div *ngIf="formCheckEmail.get('email')?.invalid && (formCheckEmail.get('email')?.dirty || formCheckEmail.get('email')?.touched)">
+                      <div *ngIf="formCheckEmail.get('email')?.hasError('required')">Email không được trống</div>
+                      <div *ngIf="formCheckEmail.get('email')?.hasError('invalidEmail')">Email chưa đúng định dạng</div>
+                    </div>
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+                  </div>
+                </form>
+                <div class="new-account mt-3">
+                  <p>Đã có tài khoản? <a class="text-primary">Đăng nhập</a></p>
+                </div>
+              </div>
+
+
+              <div class="auth-form" *ngIf="formOtp == true">
+                <div class="text-center mb-3">
+                  <a href="index.html"><img src="assets/images/logo-full.png" alt=""></a>
+                </div>
+                <h4 class="text-center mb-4">Nhập mã xác thực</h4>
+                <form [formGroup]="formCheckOtp" (ngSubmit)="checkOtp()">
+                  <div class="mb-3">
+                    <label class="mb-1"><strong>Mã xác thực được gửi trong email, hãy kiểm tra email</strong></label>
+                    <input type="number" class="form-control" placeholder="mã xác thực"
+                           formControlName="otp">
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block" [disabled]="disabled"
+                            (click)="sendOtp(); waitOtp()">{{buttonText}}</button>
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="auth-form" *ngIf="formPassword == true">
+                <div class="text-center mb-3">
+                  <a href="index.html"><img src="assets/images/logo-full.png" alt=""></a>
+                </div>
+                <h4 class="text-center mb-4">Nhập mật khẩu</h4>
+                <form [formGroup]="formCheckPassword" (ngSubmit)="registerUser()">
+                  <div class="mb-3">
+                    <label class="mb-1"><strong>Mật khẩu</strong></label>
+                    <input type="password" class="form-control" placeholder="mật khẩu ít nhất 8 kí tự"
+                           formControlName="password">
+                  </div>
+                  <div class="mb-3">
+                    <label class="mb-1"><strong>Nhập lại mật khẩu</strong></label>
+                    <input type="password" class="form-control" placeholder="Nhập lại"
+                           formControlName="confirmPassword">
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<ng-template #falseModal>
+  <div class="modal-header false-modal">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+</ng-template>

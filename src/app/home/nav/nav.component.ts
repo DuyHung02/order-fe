@@ -99,7 +99,6 @@ export class NavComponent implements OnInit {
         this.modalService.open(this.signUpModal)
       }
     }, error => {
-      console.log(error)
       if (error.status == 410) {
         this.messageModal = error.error.message
         this.modalService.open(this.falseModal)
