@@ -33,7 +33,6 @@ import { UpdateCategoryComponent } from './categories/category/update-category/u
 import { SignUpComponent } from './auth/sign-up/sign-up/sign-up.component';
 import { NavBarComponent } from './home/nav-bar/nav-bar.component';
 import { BodyComponent } from './home/body/body.component';
-import { SwiperDirectiveDirective } from './home/swiper-directive.directive';
 import {CommonModule} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
@@ -65,7 +64,6 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     SignUpComponent,
     NavBarComponent,
     BodyComponent,
-    SwiperDirectiveDirective,
     ContentComponent,
     SignInComponent],
   imports: [
@@ -85,7 +83,6 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     multi: true
   }],
   exports: [
-    SwiperDirectiveDirective
   ],
   bootstrap: [AppComponent]
 })
