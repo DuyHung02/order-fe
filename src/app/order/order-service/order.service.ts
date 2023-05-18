@@ -11,7 +11,7 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getAllOrder(): Observable<OrderDto[]> {
-    return this.http.get<OrderDto[]>('http://localhost:3000/orders')
+    return this.http.get<OrderDto[]>('http://localhost:3000/orders/all')
   }
 
   getNewOrder(): Observable<OrderDto[]> {

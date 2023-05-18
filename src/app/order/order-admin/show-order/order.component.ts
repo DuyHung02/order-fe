@@ -23,8 +23,9 @@ export class OrderComponent implements OnInit{
     // @ts-ignore
     this.userDto = JSON.parse(localStorage.getItem('userDto'))
     this.userId = this.userDto?.id
-    this.orderService.getNewOrder().subscribe(data => {
+    this.orderService.getAllOrder().subscribe(data => {
       this.orders = data
+      console.log(data)
     })
   }
 
