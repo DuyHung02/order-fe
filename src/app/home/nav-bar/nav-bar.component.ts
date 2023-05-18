@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserDto} from "../../user/userDto/userDto";
+import {ProfileDto} from "../../profile/profileDto/profileDto";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,9 +10,12 @@ import {UserDto} from "../../user/userDto/userDto";
 export class NavBarComponent implements OnInit{
 
   userDto: UserDto | undefined
+  profileDto: ProfileDto | undefined
   ngOnInit(): void {
     // @ts-ignore
     this.userDto = JSON.parse(localStorage.getItem('userDto'))
+    // @ts-ignore
+    this.profileDto = JSON.parse(localStorage.getItem('profileDto'))
   }
 
   logout() {

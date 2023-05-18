@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { UpdateProfileComponent } from './profile/update-profile/update-profile.component';
 import { HomeIndexComponent } from './home/home-index/home-index.component';
 import {AddTokenInterceptor} from "./auth/token/add-token.interceptor";
 import { HomeComponent } from './home/home/home.component';
@@ -36,12 +35,12 @@ import { BodyComponent } from './home/body/body.component';
 import {CommonModule} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { DepositComponent } from './profile/deposit/deposit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryComponent,
-    UpdateProfileComponent,
     HomeIndexComponent,
     HomeComponent,
     ShowProfileComponent,
@@ -65,7 +64,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     NavBarComponent,
     BodyComponent,
     ContentComponent,
-    SignInComponent],
+    SignInComponent,
+    DepositComponent],
   imports: [
     FormsModule,
     HttpClientModule,

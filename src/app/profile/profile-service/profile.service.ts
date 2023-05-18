@@ -21,9 +21,9 @@ export class ProfileService {
     return this.http.post<ProfileDto>('http://localhost:3000/profiles/update', profile)
   }
 
-  saveDeposit(profileId: number | undefined, deposit: number): Observable<ProfileDto> {
-    const depositProfile = {profileId, deposit}
-    return this.http.post<ProfileDto>('http://localhost:3000/users/deposit', depositProfile)
+  saveDeposit(deposit: number): Observable<ProfileDto> {
+    const depositProfile = {deposit}
+    return this.http.post<ProfileDto>('http://localhost:3000/profiles/deposit', depositProfile)
   }
 
   findUserProfile(): Observable<UserDto> {

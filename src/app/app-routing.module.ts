@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {UpdateProfileComponent} from "./profile/update-profile/update-profile.component";
 import {HomeComponent} from "./home/home/home.component";
 import {ShowProfileComponent} from "./profile/show-profile/show-profile.component";
 import {ChangePasswordComponent} from "./auth/change-password/change-password.component";
@@ -27,14 +26,15 @@ import {SignUpComponent} from "./auth/sign-up/sign-up/sign-up.component";
 import {BodyComponent} from "./home/body/body.component";
 import {ContentComponent} from "./home/content/content.component";
 import {SignInComponent} from "./auth/sign-in/sign-in.component";
+import {DepositComponent} from "./profile/deposit/deposit.component";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
   {path: 'check/mail/forgot/password', component: CheckMailForgotPassComponent},
   {path: 'check/otp/password', component: CheckOtpChangePasswordComponent},
-  {path: 'update/profile', component: UpdateProfileComponent},
   {path: 'home', component: HomeComponent},
   {path: 'profile', component: ShowProfileComponent},
+  {path: 'deposit', component: DepositComponent},
   {path: 'change/password', component: ChangePasswordComponent},
   {path: 'check/otp/forgot/password', component: CheckOtpForgotPassComponent},
   {path: 'forgot/password', component: ForgotPasswordComponent},

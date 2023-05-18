@@ -31,6 +31,7 @@ export class SignInComponent {
       this.userService.findUserRole().subscribe(user => {
         this.userDto = user
         localStorage.setItem('userDto', JSON.stringify(user))
+        localStorage.setItem('profileDto', JSON.stringify(user.profile))
         this.roles = user?.roles
         if (this.roles) {
           for (let i = 0; i < this.roles?.length; i++) {

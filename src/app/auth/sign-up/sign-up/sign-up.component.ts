@@ -48,6 +48,7 @@ export class SignUpComponent {
       await this.cartService.createCart().toPromise()
       const user = await this.userService.findUserById().toPromise();
       await localStorage.setItem('userDto', JSON.stringify(user))
+      await localStorage.setItem('profileDto', JSON.stringify(user?.profile))
        location.replace('/')
     } else {
       this.modalService.open(this.falseModal)

@@ -41,6 +41,15 @@ export class AuthService {
     return this.http.get<number>(`http://localhost:3000/auth/send/otp/${email}`)
   }
 
+  sendOtpDeposit(): Observable<number> {
+    return this.http.get<number>(`http://localhost:3000/profiles/send/otp/deposit`)
+  }
+
+  checkOtpDeposit(confirmOtp: number): Observable<boolean> {
+    const authOtp = {confirmOtp, typeCode: 'deposit'}
+    return this.http.post<boolean>('http://localhost:3000/profiles/check/otp/deposit', authOtp)
+  }
+
   sendOtpChangePassword(email: string): Observable<number> {
     return this.http.get<number>(`http://localhost:3000/users/send/otp/${email}`)
   }

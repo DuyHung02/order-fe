@@ -1,0 +1,61 @@
+<body class="vh-100">
+<div class="authincation ">
+  <div class="container">
+    <div class="row justify-content-center h-100 align-items-center">
+      <div class="col-md-6">
+        <div class="authincation-content">
+          <div class="row no-gutters">
+            <div class="col-xl-12">
+
+              <div class="auth-form" *ngIf="formDeposit == true">
+                <div class="text-center mb-3">
+                  <a href="index.html"><img src="assets/images/logo-full.png" alt=""></a>
+                </div>
+                <h4 class="text-center mb-4">Nạp tiền</h4>
+                <form [formGroup]="formDepositInput" (ngSubmit)="getDeposit()">
+                  <div class="mb-3">
+                    <label class="mb-1"><strong></strong></label>
+                    <input type="number" class="form-control" placeholder="nhập số tiền"
+                           formControlName="balance">
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+                  </div>
+                </form>
+              </div>
+
+
+              <div class="auth-form" *ngIf="formOtp == true">
+                <div class="text-center mb-3">
+                  <a href="index.html"><img src="assets/images/logo-full.png" alt=""></a>
+                </div>
+                <h4 class="text-center mb-4">Nhập mã xác thực</h4>
+                <form [formGroup]="formCheckOtp" (ngSubmit)="checkOtpDeposit()">
+                  <div class="mb-3">
+                    <label class="mb-1"><strong>Mã xác thực được gửi trong email, hãy kiểm tra email</strong></label>
+                    <input type="number" class="form-control" placeholder="mã xác thực"
+                           formControlName="otp">
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block" [disabled]="disabled"
+                            (click)="sendOtp(); waitOtp()">{{buttonText}}</button>
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<ng-template #falseModal>
+  <div class="modal-header false-modal">
+    <h4 class="modal-title">{{messageModal}}</h4>
+  </div>
+</ng-template>

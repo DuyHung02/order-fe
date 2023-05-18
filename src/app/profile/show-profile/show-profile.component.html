@@ -1,144 +1,101 @@
 
-<div class="osahan-profile">
-  <div class="d-none">
-    <div class="bg-primary border-bottom p-3 d-flex align-items-center">
-      <a class="toggle togglew toggle-2" href="#"><span></span></a>
-      <h4 class="fw-bold m-0 text-white">Profile</h4>
-    </div>
-  </div>
+<div class="content-body">
+  <!-- row -->
+  <div class="container">
 
-  <div class="container position-relative">
-    <div class="py-5 osahan-profile row">
-      <div class="col-md-4 mb-3">
-        <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-          <a href="" class="">
-            <div class="d-flex align-items-center p-3">
-              <div class="left me-3" style="text-align: center">
-                <img [src]="avatar" class="rounded-circle avt">
-              </div>
-            </div>
-          </a>
-          <div class="osahan-credits d-flex align-items-center p-3 bg-light">
-            <div class="form-group">
-              <label class="text-dark pb-1">Chọn avatar:</label>
-              <input type="file" #upLoadFile (change)="upAvatarUser()" class="form-control py-1">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8 mb-3">
-        <div class="rounded shadow-sm p-4 bg-white">
-          <h5 class="mb-4">My account</h5>
-          <div id="edit_profile">
-            <div>
-
-              <form [formGroup]="formProfile" (ngSubmit)="saveProfile()">
-                  <input type="text" hidden class="form-control" formControlName="id">
-                <div class="form-group mb-3">
-                  <label class="pb-1">Số dư: </label>
-                  <input type="text" readonly class="form-control" formControlName="balance">
-                  <button class="btn btn-success" type="button" (click)="openDepositModal()">Nạp thêm +</button>
+    <form [formGroup]="formProfile" (ngSubmit)="saveProfile()">
+      <div class="row">
+        <div class="col-xl-4">
+          <div class="card h-auto">
+            <div class="card-body">
+              <div class="profile text-center">
+                <h6>ID: {{profile?.id}}</h6>
+                <div class="setting-img mb-4">
+                  <div class="avatar-upload ">
+                    <div class="avatar-preview">
+                      <img [src]="avatar" class="avt">
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group mb-3">
-                  <label class="pb-1">Họ: </label>
-                  <input type="text" class="form-control" formControlName="first_name">
+                <div>
+                  <h6>{{profile?.first_name + ' ' + profile?.last_name}}</h6>
+                  <p>{{profile?.gender}}</p>
                 </div>
-                <div class="form-group mb-3">
-                  <label class="pb-1">Tên: </label>
-                  <input type="text" class="form-control" formControlName="last_name">
+                <div class="change-btn d-flex align-items-center justify-content-center mt-3">
+                  <input type='file' class="form-control ms-0" id="imageUpload" #upLoadFile (change)="upAvatarUser()"/>
+                  <label for="imageUpload" class="dlab-upload">Sửa Avatar</label>
+                  <a class="btn remove-img ms-2">Xóa ảnh</a>
                 </div>
-                <div class="form-group mb-3">
-                  <label class="pb-1">Tuổi:</label>
-                  <input type="number" class="form-control" formControlName="age">
-                </div>
-                <div class="form-group mb-3">
-                  <label class="pb-1">Giới tính:</label>
-                  <select formControlName="gender" class="form-select">
-                    <option value="male">Nam</option>
-                    <option value="female">Nữ</option>
-                    <option value="other">Khác</option>
-                  </select>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary w-100">Lưu thay đổi</button>
-                </div>
-              </form>
-
-            </div>
-            <div class="additional">
-              <div class="change_password my-3">
-                <a routerLink="/check/mail/password"
-                   class="p-3 border rounded bg-white btn d-flex align-items-center">Đổi mật khẩu
-                  <i class="feather-arrow-right ms-auto"></i></a>
               </div>
             </div>
           </div>
         </div>
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-body">
+              <div class="bacic-info mb-3">
+                <h4 class="mb-3">Thông tin</h4>
+                <div class="row">
+                  <div class="col-xl-6">
+                    <label class="form-label">Họ</label>
+                    <input type="text" class="form-control mb-3" formControlName="first_name">
+                  </div>
+                  <div class="col-xl-6">
+                    <label class="form-label">Tên</label>
+                    <input type="text" class="form-control mb-3" formControlName="last_name">
+                  </div>
+                  <div class="col-xl-6">
+                    <label class="form-label">Tuổi</label>
+                    <input type="text" class="form-control mb-3" formControlName="age">
+                  </div>
+                  <div class="col-xl-6">
+                    <label class="form-label">Giới tính</label>
+                    <select formControlName="gender" class="form-select">
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                      <option value="other">Khác</option>
+                    </select>
+                  </div>
+                  <div class="col-xl-12">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" readonly class="form-control mb-3" value="{{userDto?.email}}">
+                  </div>
+                  <div class="col-xl-4">
+<!--                    <label class="form-label">Balance</label>-->
+                    <br>
+                    <input class="form-control" readonly value="{{profile?.balance}}" type="{{ showBalance ? 'text' : 'password' }}" [(ngModel)]="password">
+                    <br>
+                    <button class="badge badge-outline-primary" (click)="togglePasswordVisibility()" type="button">
+                      show</button>
+                  </div>
+                  <div class="col-xl-3">
+                    <br>
+                    <button type="button" class="btn  btn-primary" routerLink="/deposit"><span
+                      class="btn-icon-start text-primary"><i class="fa fa-plus color-info"></i>
+                    </span>Nạp</button>
+                  </div>
+                  <div class="col-xl-5">
+                    <br>
+                    <button class="btn btn-outline-primary float-end ms-3">Cancel</button>
+                    <button class="btn btn-primary float-end">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
+
   </div>
 </div>
-
-<ng-template #CheckOtpModal>
-  <div class="modal-header">
-    <div class="px-5 col-10 mx-auto mb-4">
-      <h2 class="mb-3">Xác nhận gmail</h2>
-      <h6 class="text-black-50">Nhập mã OTP tại đây</h6>
-
-      <form [formGroup]="formOtp" (ngSubmit)="checkOtp()">
-        <div class="row my-5 mx-0 otp">
-          <div class="col pe-1 ps-0">
-            <input type="text" pattern="[0-9]*" maxlength="1" formControlName="otp1"
-                   class="form-control form-control-lg">
-          </div>
-          <div class="col px-2">
-            <input type="text" pattern="[0-9]*" maxlength="1" formControlName="otp2"
-                   class="form-control form-control-lg">
-          </div>
-          <div class="col px-2">
-            <input type="text" pattern="[0-9]*" maxlength="1" formControlName="otp3"
-                   class="form-control form-control-lg">
-          </div>
-          <div class="col ps-1 pe-0">
-            <input type="text" pattern="[0-9]*" maxlength="1" formControlName="otp4"
-                   class="form-control form-control-lg">
-          </div>
-        </div>
-        <button type="button" class="btn btn-lg btn-secondary btn-otp w-70" [disabled]="disabled"
-                (click)="sendOtp(); waitOtp()">{{buttonText}}</button>
-        <br>
-        <button class="btn btn-lg btn-primary w-100" type="submit">Xác nhận</button>
-      </form>
-
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #depositModal>
-  <div class="modal-header">
-    <div class="px-5 col-10 mx-auto">
-      <h2 class="text-dark my-0">Nạp tiền</h2>
-      <p class="text-50">Nhập số tiền muốn nạp:</p>
-
-      <form class="mt-5 mb-4" [formGroup]="formDeposit" (ngSubmit)="getDeposit()">
-        <div class="form-group">
-          <label class="text-dark pb-1">Nhập: </label>
-          <input type="number" placeholder="mức giá" class="form-control py-1" formControlName="balance">
-        </div>
-        <br>
-        <button class="btn btn-primary btn-lg w-100" type="submit">Đồng ý</button>
-      </form>
-
-    </div>
-  </div>
-</ng-template>
 
 <ng-template #successModal>
   <div class="modal-header">
     <h4 class="modal-title">{{messageModal}}</h4>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="hiddenModal()" >Đóng!</button>
+    <button type="button" class="btn btn-primary" (click)="hiddenModal()">Đóng!</button>
   </div>
 </ng-template>
 
