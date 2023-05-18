@@ -41,18 +41,14 @@ export class SignUpComponent {
   async registerUser() {
     const password = this.formCheckPassword.value.password + ''
     const confirmPassword = this.formCheckPassword.value.confirmPassword + ''
-    if (this.checkPassword(password, confirmPassword)) {
-      await this.authService.createUser(this.email, password).subscribe(token => {
-        localStorage.setItem("token", token.access_token + "")
-      })
-      await this.profileService.createProfile().subscribe(() => {
-      })
-      await this.cartService.createCart().subscribe(() => {
-      })
-      await this.userService.findUserById().subscribe(user => {
-        localStorage.setItem('userDto', JSON.stringify(user))
-      })
-      location.replace('/home')
+     if (this.checkPassword(password, confirmPassword)) {
+      const token = await this.authService.createUser(this.email, password).toPromise();
+      await localStorage.setItem("token", token?.access_token + "")
+      await this.profileService.createProfile().toPromise()
+      await this.cartService.createCart().toPromise()
+      const user = await this.userService.findUserById().toPromise();
+      await localStorage.setItem('userDto', JSON.stringify(user))
+       location.replace('/')
     } else {
       this.modalService.open(this.falseModal)
     }

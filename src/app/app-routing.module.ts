@@ -26,6 +26,7 @@ import {UpdateCategoryComponent} from "./categories/category/update-category/upd
 import {SignUpComponent} from "./auth/sign-up/sign-up/sign-up.component";
 import {BodyComponent} from "./home/body/body.component";
 import {ContentComponent} from "./home/content/content.component";
+import {SignInComponent} from "./auth/sign-in/sign-in.component";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
@@ -47,7 +48,9 @@ const routes: Routes = [
   {path: 'user/order', component: OrderUserComponent},
   {path: 'update/category', component: UpdateCategoryComponent},
 
+
   {path: 'register', component: SignUpComponent},
+  {path: 'login', component: SignInComponent},
   {path: '', component: BodyComponent},
   {path: 'content', component: ContentComponent}
 ];

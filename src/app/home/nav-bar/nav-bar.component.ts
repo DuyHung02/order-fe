@@ -10,6 +10,13 @@ export class NavBarComponent implements OnInit{
 
   userDto: UserDto | undefined
   ngOnInit(): void {
+    // @ts-ignore
+    this.userDto = JSON.parse(localStorage.getItem('userDto'))
+  }
+
+  logout() {
+    localStorage.clear()
+    location.replace('/')
   }
 
 }

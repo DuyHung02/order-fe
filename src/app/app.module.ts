@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UpdateProfileComponent } from './profile/update-profile/update-profile.component';
 import { HomeIndexComponent } from './home/home-index/home-index.component';
 import {AddTokenInterceptor} from "./auth/token/add-token.interceptor";
-import { NavComponent } from './home/nav/nav.component';
 import { HomeComponent } from './home/home/home.component';
 import { ShowProfileComponent } from './profile/show-profile/show-profile.component';
 import {environment} from "../environments/environment";
@@ -37,6 +36,7 @@ import { BodyComponent } from './home/body/body.component';
 import { SwiperDirectiveDirective } from './home/swiper-directive.directive';
 import {CommonModule} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { ContentComponent } from './home/content/content.component';
     CategoryComponent,
     UpdateProfileComponent,
     HomeIndexComponent,
-    NavComponent,
     HomeComponent,
     ShowProfileComponent,
     ChangePasswordComponent,
@@ -67,7 +66,8 @@ import { ContentComponent } from './home/content/content.component';
     NavBarComponent,
     BodyComponent,
     SwiperDirectiveDirective,
-    ContentComponent],
+    ContentComponent,
+    SignInComponent],
   imports: [
     FormsModule,
     HttpClientModule,
