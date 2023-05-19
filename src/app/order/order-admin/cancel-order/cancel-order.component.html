@@ -1,0 +1,77 @@
+<div class="content-body">
+  <!-- row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Đơn đã xong</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-responsive-md">
+                <thead>
+                <tr>
+                  <th><strong>MHĐ</strong></th>
+                  <th><strong>Người đặt</strong></th>
+                  <th><strong>Tổng món</strong></th>
+                  <th><strong>Giá đơn</strong></th>
+                  <th><strong>Trạng thái</strong></th>
+                  <!--                  <th><strong>Thời gian đặt</strong></th>-->
+                  <th><strong>Chi tiết</strong></th>
+                  <th><strong></strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let o of orders; let i = index">
+                  <td><strong>{{o?.id}}</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center"><img class="avt" src="{{o?.user?.profile?.avatar}}"
+                    /> <span
+                      class="w-space-no">{{o?.user?.profile?.last_name}}</span></div>
+                  </td>
+                  <td>{{o?.total_product}}</td>
+                  <td>{{o?.total_price}}</td>
+                  <td>
+                    <div class="d-flex align-items-center"><i
+                      class="fa fa-circle text-dark me-1"></i> Đã hủy
+                    </div>
+                  </td>
+                  <!--                  <td>{{o?.create_at?.getDate()}}</td>-->
+                  <td>
+                    <div class="d-flex">
+                      <a href="#" class="btn btn-primary shadow btn-sm sharp me-4"><i
+                        class="fa fa-search"></i></a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex">
+                      <a (click)="openReasonModal(o?.reason_cancel)" class="btn btn-secondary shadow btn-sm sharp me-4 w-50">Nguyên nhân</a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #reasonModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Nguyên nhân hủy</h5>
+      <button type="button" class="btn-close" (click)="hideModal()">
+      </button>
+    </div>
+    <div class="modal-body" style="text-align: center">
+      <h5>{{reasonCancel}}</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger light btn-sm" (click)="hideModal()">Close</button>
+    </div>
+  </div>
+</ng-template>

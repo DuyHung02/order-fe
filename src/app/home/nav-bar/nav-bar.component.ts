@@ -11,7 +11,7 @@ export class NavBarComponent implements OnInit {
 
   userDto: UserDto | undefined
   profileDto: ProfileDto | undefined
-  isAdmin: boolean = false
+  isAdmin: string = 'user'
 
   ngOnInit(): void {
     // @ts-ignore
@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
     if (roles) {
       for (let i = 0; i < roles.length; i++) {
         if (roles[i].name === 'admin') {
-          this.isAdmin = true
+          this.isAdmin = 'admin'
           break;
         }
       }

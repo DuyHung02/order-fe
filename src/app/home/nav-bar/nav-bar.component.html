@@ -199,7 +199,7 @@
 <!--  Header end ti-comment-alt  -->
 
 <!--  Sidebar start User -->
-<div class="dlabnav border-right">
+<div class="dlabnav border-right" *ngIf="isAdmin == 'user'">
   <div class="dlabnav-scroll">
     <p class="menu-title style-1"> Main Menu</p>
     <ul class="metismenu" id="menu">
@@ -231,53 +231,55 @@
       </li>
     </ul>
   </div>
-  <!--  Sidebar end  -->
+</div>
+<!--  Sidebar end  -->
 
 
-  <!--  Sidebar start Admin -->
-  <div class="dlabnav border-right" *ngIf="isAdmin === true">
-    <div class="dlabnav-scroll">
-      <p class="menu-title style-1"> Main Menu</p>
-      <ul class="metismenu" id="menu1">
-        <li><a class="has-arrow " routerLink="/admin/order" aria-expanded="false">
+<!--  Sidebar start Admin -->
+<div class="dlabnav border-right" *ngIf="isAdmin == 'admin'">
+  <div class="dlabnav-scroll">
+    <p class="menu-title style-1"> Main Menu</p>
+    <ul class="metismenu" id="menu1">
+      <li><a class="has-arrow " routerLink="/admin/orders" aria-expanded="false">
 
-          <i class="bi bi-file-earmark-check"></i>
-          <span class="nav-text">Đơn hàng</span>
-        </a>
-          <ul aria-expanded="false">
-            <li><a routerLink="/">Đơn hàng mới</a></li>
-            <li><a href="orders.html">Đơn đã nhận</a></li>
-            <li><a href="restro-setting.html">Đơn đã xong</a></li>
-          </ul>
-        </li>
+        <i class="bi bi-file-earmark-check"></i>
+        <span class="nav-text">Đơn hàng</span>
+      </a>
+        <ul aria-expanded="false">
+          <li><a routerLink="/admin/orders/new">Đơn hàng mới</a></li>
+          <li><a routerLink="/admin/orders/waiting">Đơn đang chờ</a></li>
+          <li><a routerLink="/admin/orders/done">Đơn đã xong</a></li>
+          <li><a routerLink="/admin/orders/waiting/cancel">Đơn yêu cầu hủy</a></li>
+          <li><a routerLink="/admin/orders/cancel">Đơn đã hủy</a></li>
+        </ul>
+      </li>
 
-        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+      <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
 
-          <i class="bi bi-shop-window"></i>
-          <span class="nav-text">Sản phẩm</span>
-        </a>
-          <ul aria-expanded="false">
-            <li><a routerLink="/">Tất cả món</a></li>
-            <li><a href="orders.html">Các món hết</a></li>
-          </ul>
-        </li>
+        <i class="bi bi-shop-window"></i>
+        <span class="nav-text">Sản phẩm</span>
+      </a>
+        <ul aria-expanded="false">
+          <li><a routerLink="/">Tất cả món</a></li>
+          <li><a href="orders.html">Các món hết</a></li>
+        </ul>
+      </li>
 
-        <li class="menu-title">Other</li>
-        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-          <i class="bi bi-info-circle"></i>
-          <span class="nav-text">Somethings</span>
-        </a>
-          <ul aria-expanded="false">
-            <li><a href="app-calender.html">Calendar</a></li>
-            <li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Shop</a>
-              <ul aria-expanded="false">
-                <li><a href="ecom-product-grid.html">Product Grid</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!--  Sidebar end  -->
+      <li class="menu-title">Other</li>
+      <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+        <i class="bi bi-info-circle"></i>
+        <span class="nav-text">Somethings</span>
+      </a>
+        <ul aria-expanded="false">
+          <li><a href="app-calender.html">Calendar</a></li>
+          <li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Shop</a>
+            <ul aria-expanded="false">
+              <li><a href="ecom-product-grid.html">Product Grid</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
+  <!--  Sidebar end  -->
 </div>

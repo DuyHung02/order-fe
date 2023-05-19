@@ -60,14 +60,14 @@ export class OrderService {
     return this.http.post<OrderDto[]>('http://localhost:3000/orders/user/cancel', id)
   }
 
-  confirmOrder(orderId: number | undefined | null, userId: number | undefined | null): Observable<OrderDto[]> {
-    const orderUser = {orderId, userId}
+  confirmOrder(orderId: number | undefined | null): Observable<OrderDto[]> {
+    const orderUser = {orderId}
     return this.http.post<OrderDto[]>(`http://localhost:3000/orders/confirm`, orderUser)
   }
 
-  cancelOrder(orderId: number | undefined | null, userId: number | undefined | null): Observable<OrderDto[]> {
-    const orderUser = {orderId, userId}
-    return this.http.post<OrderDto[]>(`http://localhost:3000/orders/cancel`, orderUser)
+  cancelOrder(orderId: number | undefined | null, reason: string): Observable<any> {
+    const orderUser = {orderId, reason}
+    return this.http.post<any>(`http://localhost:3000/orders/cancel`, orderUser)
   }
 
 }

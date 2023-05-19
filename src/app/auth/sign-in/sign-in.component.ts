@@ -36,7 +36,7 @@ export class SignInComponent {
         if (this.roles) {
           for (let i = 0; i < this.roles?.length; i++) {
             if (this.roles[i].name === 'admin') {
-              location.replace('home/admin')
+              location.replace('admin/home')
               break;
             } else {
               location.replace('/')

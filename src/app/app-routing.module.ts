@@ -27,6 +27,10 @@ import {BodyComponent} from "./home/body/body.component";
 import {ContentComponent} from "./home/content/content.component";
 import {SignInComponent} from "./auth/sign-in/sign-in.component";
 import {DepositComponent} from "./profile/deposit/deposit.component";
+import {NewOrderComponent} from "./order/order-admin/new-order/new-order.component";
+import {WaitingOrderComponent} from "./order/order-admin/waiting-order/waiting-order.component";
+import {DoneOrderComponent} from "./order/order-admin/done-order/done-order.component";
+import {CancelOrderComponent} from "./order/order-admin/cancel-order/cancel-order.component";
 
 const routes: Routes = [
   {path: 'check/mail/password', component: CheckMailChangePasswordComponent},
@@ -38,12 +42,9 @@ const routes: Routes = [
   {path: 'change/password', component: ChangePasswordComponent},
   {path: 'check/otp/forgot/password', component: CheckOtpForgotPassComponent},
   {path: 'forgot/password', component: ForgotPasswordComponent},
-  {path: 'home/admin', component: HomeAdminComponent, canActivate: [AdminGuard]},
   {path: 'create/product', component: CreateProductComponent},
   {path: 'edit/product/:id', component: EditProductComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'admin/order', component: OrderComponent},
-  {path: 'admin/order/detail', component: DetailOrderComponent},
   {path: 'user/order/detail', component: DetailOrderUserComponent},
   {path: 'user/order', component: OrderUserComponent},
   {path: 'update/category', component: UpdateCategoryComponent},
@@ -52,7 +53,14 @@ const routes: Routes = [
   {path: 'register', component: SignUpComponent},
   {path: 'login', component: SignInComponent},
   {path: '', component: BodyComponent},
-  {path: 'content', component: ContentComponent}
+  {path: 'content', component: ContentComponent},
+  {path: 'admin/orders', component: OrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/orders/new', component: NewOrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/orders/waiting', component: WaitingOrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/orders/done', component: DoneOrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/orders/cancel', component: CancelOrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/order/detail', component: DetailOrderComponent, canActivate: [AdminGuard]},
+  {path: 'admin/home', component: HomeAdminComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

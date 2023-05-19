@@ -34,7 +34,7 @@ export class DetailOrderComponent implements OnInit{
   }
 
   confirmOrder(orderId: number | undefined) {
-    this.orderService.confirmOrder(orderId, this.userId).subscribe(data => {
+    this.orderService.confirmOrder(orderId).subscribe(data => {
       this.orderService.getOrderDetail(orderId).subscribe(data => {
         this.orderDto = data
       })

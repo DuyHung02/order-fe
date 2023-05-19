@@ -36,6 +36,10 @@ import {CommonModule} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { DepositComponent } from './profile/deposit/deposit.component';
+import { NewOrderComponent } from './order/order-admin/new-order/new-order.component';
+import { WaitingOrderComponent } from './order/order-admin/waiting-order/waiting-order.component';
+import { DoneOrderComponent } from './order/order-admin/done-order/done-order.component';
+import { CancelOrderComponent } from './order/order-admin/cancel-order/cancel-order.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,11 @@ import { DepositComponent } from './profile/deposit/deposit.component';
     BodyComponent,
     ContentComponent,
     SignInComponent,
-    DepositComponent],
+    DepositComponent,
+    NewOrderComponent,
+    WaitingOrderComponent,
+    DoneOrderComponent,
+    CancelOrderComponent],
   imports: [
     FormsModule,
     HttpClientModule,
