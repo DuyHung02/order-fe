@@ -17,24 +17,22 @@ export class CartService {
     return this.http.post('http://localhost:3000/carts/create', cart)
   }
 
-  addToCart(cartId: number | null | undefined, productId: number | null | undefined): Observable<CartDto> {
-    const idCartProduct = {cartId, productId}
+  addToCart(productId: number | null | undefined): Observable<CartDto> {
+    const idCartProduct = {productId}
     return this.http.post<CartDto>('http://localhost:3000/carts/add/product', idCartProduct)
   }
 
-  removeFromCart(cartId: number | null | undefined, productId: number | null | undefined): Observable<CartDto> {
-    const idCartProduct = {cartId, productId}
+  removeFromCart(productId: number | null | undefined): Observable<CartDto> {
+    const idCartProduct = {productId}
     return this.http.post<CartDto>('http://localhost:3000/carts/delete/product', idCartProduct)
   }
 
-  createOrder(userId: number | null | undefined, cartId: number | null | undefined): Observable<any> {
-    const createOrderDto = {userId, cartId}
-    return this.http.post<any>('http://localhost:3000/orders/create', createOrderDto)
+  createOrder(): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/orders/create')
   }
 
-  getItemsCart(id: number | null | undefined): Observable<CartDto> {
-    const cartId = {cartId: id}
-    return this.http.post<CartDto>('http://localhost:3000/carts/get/products', cartId)
+  getCart(): Observable<CartDto> {
+    return this.http.get<CartDto>('http://localhost:3000/carts/get/cart')
   }
 
   test() {

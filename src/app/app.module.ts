@@ -22,7 +22,6 @@ import { HomeAdminComponent } from './home/home-admin/home-admin.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { EditProductComponent } from './product/edit-product/edit-product.component';
 import { MenuComponent } from './home/menu/menu.component';
-import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order-admin/show-order/order.component';
 import { DetailOrderComponent } from './order/order-admin/detail-order/detail-order.component';
 import { OrderUserComponent } from './order/order-user/order-user.component';
@@ -61,7 +60,6 @@ import { ActiveOffProductComponent } from './product/active-off-product/active-o
     CreateProductComponent,
     EditProductComponent,
     MenuComponent,
-    CartComponent,
     OrderComponent,
     DetailOrderComponent,
     OrderUserComponent,

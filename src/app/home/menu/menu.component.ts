@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit, OnChanges{
   }
 
   addToCart(productId: number | null | undefined) {
-    this.cartService.addToCart(this.cartId, productId).subscribe(data => {
+    this.cartService.addToCart(productId).subscribe(data => {
       this.cartDto.emit(data)
     }, error => {
       this.messageModal = error.error.message

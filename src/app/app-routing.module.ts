@@ -15,7 +15,6 @@ import {ForgotPasswordComponent} from "./auth/forgot-password/forgot-password.co
 import {HomeAdminComponent} from "./home/home-admin/home-admin.component";
 import {CreateProductComponent} from "./product/create-product/create-product.component";
 import {EditProductComponent} from "./product/edit-product/edit-product.component";
-import {CartComponent} from "./cart/cart.component";
 import {OrderComponent} from "./order/order-admin/show-order/order.component";
 import {DetailOrderComponent} from "./order/order-admin/detail-order/detail-order.component";
 import {OrderUserComponent} from "./order/order-user/order-user.component";
@@ -45,7 +44,6 @@ const routes: Routes = [
   {path: 'change/password', component: ChangePasswordComponent},
   {path: 'check/otp/forgot/password', component: CheckOtpForgotPassComponent},
   {path: 'forgot/password', component: ForgotPasswordComponent},
-  {path: 'cart', component: CartComponent},
   {path: 'user/order/detail', component: DetailOrderUserComponent},
   {path: 'user/order', component: OrderUserComponent},
   {path: 'update/category', component: UpdateCategoryComponent},
