@@ -31,7 +31,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     localStorage.clear()
-    location.replace('/')
   }
 
 }
