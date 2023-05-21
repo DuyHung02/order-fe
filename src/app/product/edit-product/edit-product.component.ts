@@ -5,7 +5,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ProductService} from "../product.service";
 import {CategoryDto} from "../../categories/dtos/CategoryDto";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {ProductDto} from "../dtos/ProductDto";
 
@@ -16,57 +16,56 @@ import {ProductDto} from "../dtos/ProductDto";
 })
 export class EditProductComponent implements OnInit {
 
-  @ViewChild('upLoadFile', {static: true}) public avatarDom: ElementRef | undefined;
-  @ViewChild('productModal') productModal: any;
-
   constructor(private categoryService: CategoryService,
               private storage: AngularFireStorage,
               private modalService: NgbModal,
               private productService: ProductService,
               private route: ActivatedRoute) {
   }
+  @ViewChild('upLoadFile', {static: true}) public avatarDom: ElementRef | undefined;
+  @ViewChild('falseModal') falseModal: any;
+  @ViewChild('successModal') successModal: any;
 
-  categories: CategoryDto[] = []
+  product: ProductDto | undefined
+  productId: number | undefined | null
+  categories: CategoryDto[] | undefined = []
   image: string | undefined = ''
   selectImage: any = null
   messageModal: string = 'Tạo thất bại'
+  is_active!: boolean
 
-  product: ProductDto | undefined
-  productId: any
-  categoryId: any = null
-
-  formProductEdit: FormGroup = new FormGroup({
+  formProduct: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl(),
     price: new FormControl(),
-    category: new FormControl(),
-    is_active: new FormControl()
+    is_active: new FormControl(),
+    category: new FormControl()
   })
-  ngOnInit(): void {
-    this.categoryService.getAllCategory().subscribe(data => {
-      this.categories = data
-      this.productId = this.route.snapshot.paramMap.get('id')
-      this.productService.getProductById(this.productId).subscribe(product => {
-        this.product = product
-        this.formProductEdit = new FormGroup({
-          id: new FormControl(this.product.id),
-          name: new FormControl(this.product.name),
-          price: new FormControl(this.product.price),
-          category: new FormControl(this.product.category?.id),
-          is_active: new FormControl(this.product.is_active)
-        })
-        this.image = this.product?.image
-      })
+  async ngOnInit() {
+    this.productId = Number(this.route.snapshot.paramMap.get('id'))
+    await this.getCategories()
+    this.product = await this.productService.getProductById(this.productId).toPromise()
+    this.formProduct = new FormGroup({
+      id: new FormControl(this.product?.id),
+      name: new FormControl(this.product?.name),
+      price: new FormControl(this.product?.price),
+      is_active: new FormControl(this.product?.is_active),
+      category: new FormControl(this.product?.category?.id)
     })
+    this.image = this.product?.image
   }
 
-  updateProduct() {
-    const product = this.formProductEdit.value
-    this.productService.updateProduct(product, this.image).subscribe(data => {
-      // this.messageModal = 'Sửa thành công'
-      // this.modalService.open(this.productModal)
-      location.replace('/home/admin')
-    })
+  async getCategories() {
+    this.categories = await this.categoryService.getAllCategory().toPromise()
+  }
+
+  async updateProduct() {
+    const product = this.formProduct.value
+    const isActiveValue = this.formProduct.value.is_active
+    this.is_active = isActiveValue == 'true';
+    await this.productService.updateProduct(product, this.image, this.is_active).toPromise()
+    this.messageModal = 'Cập nhật thành công'
+    this.modalService.open(this.successModal)
   }
 
   upAvatarUser() {
@@ -86,7 +85,8 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  hideSuccessModal() {
+
+  hideModal() {
     this.modalService.dismissAll();
   }
 }

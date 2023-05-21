@@ -28,20 +28,19 @@ export class CreateProductComponent implements OnInit{
   }
 
   categories: CategoryDto[]= []
-  avatar ='https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/orange_travelpictdinner_1484336833.png'
+  image ='https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/orange_travelpictdinner_1484336833.png'
   selectImage: any = null
   imageCategory = 'https://health.gov/sites/default/files/2019-06/SVG%20Layer4.svg'
   selectImageCategory: any = null
   messageModal: string = 'Tạo thất bại'
+  is_active!: boolean
+  categoryId!: number
 
-  formProduct: FormGroup = new FormGroup({
+  formCreateProduct: FormGroup = new FormGroup({
     name: new FormControl(),
     price: new FormControl(),
+    is_active: new FormControl(),
     category: new FormControl(),
-  })
-
-  formCategory: FormGroup = new FormGroup({
-    name: new FormControl()
   })
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe(data => {
@@ -50,23 +49,30 @@ export class CreateProductComponent implements OnInit{
   }
 
   createProduct() {
-    const product = this.formProduct.value
-    this.productService.createProduct(product, this.avatar).subscribe(data => {
-      this.messageModal = 'Thêm món thành công'
-      this.modalService.open(this.successModal)
+    const product = this.formCreateProduct.value
+    const isActiveValue = this.formCreateProduct.value.is_active
+    this.is_active = isActiveValue == 'true';
+    const categoryValue = this.formCreateProduct.value.category
+    this.categoryId = Number(categoryValue)
+    console.log(this.categoryId)
+    this.productService.createProduct(product, this.image, this.is_active, this.categoryId).subscribe(data => {
+      this.messageModal = 'Thêm món thành công, có muốn thêm tiếp?'
+      this.modalService.open(this.successModal, {backdrop: true})
     })
+  }
+
+  clearValue() {
+    this.formCreateProduct = new FormGroup({
+      name: new FormControl(),
+      price: new FormControl(),
+      is_active: new FormControl(),
+      category: new FormControl(),
+    })
+    this.image ='https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/orange_travelpictdinner_1484336833.png'
   }
 
   openCreateCategoryModal() {
     this.modalService.open(this.categoryModal)
-  }
-
-  createCategory() {
-    const category = this.formCategory.value
-    this.categoryService.createCategory(category, this.imageCategory).subscribe(data => {
-      this.categories = data
-      this.hideModal()
-    })
   }
 
   createContinue() {
@@ -93,7 +99,7 @@ export class CreateProductComponent implements OnInit{
       const fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath, this.selectImage).snapshotChanges().pipe(
         finalize(() => (fileRef.getDownloadURL().subscribe(url => {
-          this.avatar = url;
+          this.image = url;
         })))
       ).subscribe();
     }
@@ -111,13 +117,8 @@ export class CreateProductComponent implements OnInit{
     }
   }
 
-  clearValueFormCategory() {
-    this.formCategory = new FormGroup({
-      name: new FormControl('')
-    })
-  }
-
   hideModal() {
     this.modalService.dismissAll();
   }
+
 }

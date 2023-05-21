@@ -10,14 +10,16 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  createProduct(product: ProductDto, image: string): Observable<ProductDto> {
+  createProduct(product: ProductDto, image: string, is_active: boolean, categoryId: number): Observable<ProductDto> {
     product.image = image
-    product.categoryId = Number(product.category)
+    product.is_active = is_active
+    product.categoryId = categoryId
     return this.http.post<ProductDto>('http://localhost:3000/products/create', product)
   }
 
-  updateProduct(product: ProductDto, image: string | undefined): Observable<ProductDto> {
+  updateProduct(product: ProductDto, image: string | undefined, is_active: boolean): Observable<ProductDto> {
     product.image = image
+    product.is_active = is_active
     product.categoryId = Number(product.category)
     return this.http.post<ProductDto>('http://localhost:3000/products/update', product)
   }
@@ -26,11 +28,19 @@ export class ProductService {
     return this.http.get<ProductDto[]>('http://localhost:3000/products/find/all')
   }
 
+  getProductsActiveOn(): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>('http://localhost:3000/products/find/all/active/on')
+  }
+
+  getProductsActiveOff(): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>('http://localhost:3000/products/find/all/active/off')
+  }
+
   getProductByCategory(id: number): Observable<ProductDto[]> {
     return this.http.get<ProductDto[]>(`http://localhost:3000/products/find/by/category/${id}`)
   }
 
-  getProductById(id: number | undefined): Observable<ProductDto> {
-    return this.http.get(`http://localhost:3000/products/find/${id}`)
+  getProductById(productId: number | undefined): Observable<ProductDto> {
+    return this.http.get<ProductDto>(`http://localhost:3000/products/find/${productId}`)
   }
 }

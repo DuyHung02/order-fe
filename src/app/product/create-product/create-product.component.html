@@ -1,55 +1,87 @@
-<div style="text-align: center">
-  <h3>Create</h3>
-  <form [formGroup]="formProduct" (ngSubmit)="createProduct()">
-    <img [src]="avatar" class="avt"><br>
-    <label>Ảnh món</label><br>
-    <input type="file" #upLoadFile (change)="upAvatarUser()"><br><br>
-    <label>Tên món</label><br>
-    <input type="text" formControlName="name"><br><br>
-    <label>Giá món</label><br>
-    <input type="number" formControlName="price"><br><br>
-    <label>Kiểu món</label><br>
-    <select formControlName="category">
-      <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
-    </select>
-    <button type="button" (click)="openCreateCategoryModal(); clearValueFormCategory()">Thêm danh mục</button>
-    <br><br>
-    <button type="submit">Xác nhận</button>
-  </form>
+<div class="content-body">
+  <!-- row -->
+  <div class="container">
+    <form [formGroup]="formCreateProduct" (ngSubmit)="createProduct()">
+      <div class="card">
+        <div class="card-body">
+          <div class="bacic-info mb-3">
+            <div class="row">
+              <div class="col-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="new-arrival-product">
+                      <div class="new-arrivals-img-contnent rounded">
+                        <img class="img-fluid" src="{{image}}" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="change-btn d-flex align-items-center justify-content-center mt-3">
+                  <input type='file' class="form-control ms-0" id="imageUpload" #upLoadFile (change)="upAvatarUser()">
+                  <label for="imageUpload" class="dlab-upload btn btn-outline-light">Đổi ảnh</label>
+                </div>
+              </div>
+              <div class="col-8 row">
+                <div class="col-7">
+                  <label class="form-label" for="name">Tên món</label>
+                  <input class="form-control mb-3" id="name" type="text"
+                         formControlName="name" placeholder="Nhập tên món">
+                </div>
+                <div class="col-5">
+                  <label class="form-label" for="status">Trạng thái</label>
+                  <select id="status" formControlName="is_active" class="wide form-control ms-0">
+                    <option [value]="false">Hết món</option>
+                    <option [value]="true">Còn món</option>
+                  </select>
+                </div>
+                <div class="col-2">
+                  <label class="form-label" for="id">ID</label>
+                  <input class="form-control mb-3" id="id" type="text"
+                         readonly value="Auto">
+                </div>
+                <div class="col-5">
+                  <label class="form-label" for="price">Giá món</label>
+                  <input class="form-control mb-3" id="price" type="number"
+                         formControlName="price" placeholder="Nhập giá món">
+                </div>
+                <div class="col-5">
+                  <label class="form-label" for="category1">Danh mục</label>
+                  <select id="category1" formControlName="category" class="wide form-control ms-0">
+                    <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="button" routerLink="/admin/products"
+                    class="btn btn-danger light btn-sm w-25" style="margin-right: 20px">Quay lại
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm w-25">Thêm món</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
-<ng-template #categoryModal>
-  <div class="modal-header">
-<!--    <div style="text-align: center">-->
-      <h3>Thêm danh mục</h3>
-      <form [formGroup]="formCategory" (ngSubmit)="createCategory()">
-        <img [src]="imageCategory" class="img-cate"><br>
-        <label>Ảnh mục</label><br>
-        <input type="file" #upLoadCategory (change)="upLoadImageCategory()"><br><br>
-        <label>Tên danh mục</label><br>
-        <input type="text" formControlName="name"><br><br>
-        <button type="submit">Xác nhận</button>
-      </form>
-    </div>
-<!--  </div>-->
-</ng-template>
-
-<ng-template #productModal>
+<ng-template #falseModal>
   <div class="modal-header">
     <h4 class="modal-title">{{messageModal}}</h4>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="hideModal()">Đóng</button>
+    <button type="button" (click)="hideModal()"
+            class="btn btn-danger light btn-sm w-25" style="margin-right: 20px">Đóng
+    </button>
   </div>
 </ng-template>
 
 <ng-template #successModal>
-  <div class="modal-header">
+  <div class="modal-header align-items-center">
     <h4 class="modal-title">{{messageModal}}</h4>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-primary" (click)="createContinue(); hideModal()">Thêm tiếp
+    <button type="button" (click)="hideModal()" routerLink="/admin/products"
+            class="btn btn-danger light btn-sm w-25" style="margin-right: 20px">Quay lại
     </button>
-    <button type="button" class="btn btn-primary" (click)="back(); hideModal()">Xong</button>
+    <button type="button" (click)="clearValue(); hideModal()"
+            class="btn btn-danger light btn-sm w-25" style="margin-right: 20px">Thêm tiếp
+    </button>
   </div>
 </ng-template>
